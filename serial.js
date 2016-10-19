@@ -315,7 +315,7 @@ function xor(a, b) {
     return buffer
 }
 console.log('mqtt start')
-var client = mqtt.connect('mqtt://220.135.202.42', {
+var client = mqtt.connect('mqtt://61.218.160.134', {
     protocolId: 'MQIsdp',
     protocolVersion: 3
 });
