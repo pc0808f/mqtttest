@@ -403,14 +403,14 @@ serialPort.on('open', function() {
             if (result.cmd === 'G') {
                 console.log('A2 - Get G:' + JSON.stringify(result))
                 processTask.timeout = 2
-                GetSetting(function(error, setting) {
+                GetSetting(function(error, s) {
                     if (!error) {
                         var r = JSON.stringify({
                             cmd: 'H',
-                            status: setting.status,
-                            coin: setting.coin,
-                            output: setting.output,
-                            second: setting.second,
+                            status: s.status,
+                            coin: s.coin,
+                            output: s.output,
+                            second: s.second,
                             taskId: processTask.task.taskId
                         })
                         client.publish(mac + '_T', r);
@@ -424,13 +424,13 @@ serialPort.on('open', function() {
             } else if (result.cmd === "C") {
                 console.log('Start B Process')
                 processTask.timeout = 2
-                GetSetting(function(error, setting) {
+                GetSetting(function(error, s) {
                     if (!error) {
                         var r = JSON.stringify({
                             cmd: 'I',
-                            status: setting.status,
-                            coin: setting.coin,
-                            output: setting.output,
+                            status: s.status,
+                            coin: s.coin,
+                            output: s.output,
                             taskId: processTask.task.taskId
                         })
                         client.publish(mac + '_T', r);
@@ -453,7 +453,7 @@ serialPort.on('open', function() {
 
                 console.log('B2 - Get D:' + JSON.stringify(result))
                 process.timeout = 60
-                startGame(function(error, setting) {
+                startGame(function(error, s) {
                     var success = true
                     if (error) {
                         success = false
@@ -462,11 +462,11 @@ serialPort.on('open', function() {
                     if (!error) {
                         var r = JSON.stringify({
                             cmd: 'E',
-                            status: setting.status,
-                            coin: setting.coin,
-                            output: setting.output,
+                            status: s.status,
+                            coin: s.coin,
+                            output: s.output,
                             taskId: processTask.task.taskId,
-                            result: setting.result
+                            result: s.result
                         })
                         console.log('B3 - Send E:' + r)
                         if (setting.init) {
